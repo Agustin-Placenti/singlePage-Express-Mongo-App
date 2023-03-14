@@ -25,9 +25,7 @@ function SeeVideoGames() {
     fetchVideos();
   }, []);
 
-  function updateTable() {
-    fetchVideos();
-  }
+  const updateTable = () => fetchVideos();
 
   return (
     <div>
