@@ -8,14 +8,21 @@ import { fetchData } from "../utils/fetchData";
 
 function SeeVideoGames() {
   const [videogames, setVideoGames] = useState([]);
+  // crear objeto formik con array de videogames y videogame
+
+  async function fetchVideos() {
+    const response = await fetchData(`${Constants.RUTE_API_VIDEOS}`);
+    setVideoGames(response);
+    // updatear el objeto formik con el nuevo array
+  } 
 
   useEffect(() => {
-    async function fetchVideos() {
-      const response = await fetchData(`${Constants.RUTE_API_VIDEOS}`);
-      setVideoGames(response);
-    }
     fetchVideos();
   }, []);
+
+  function updateTable () {
+    fetchVideos();
+  }
 
   return (
     <div>
@@ -24,7 +31,7 @@ function SeeVideoGames() {
         <ToastContainer></ToastContainer>
       </div>
       <VideoGameContext.Provider value={videogames}>
-        <VideoGameTable />
+        <VideoGameTable updateTable={() => updateTable()}/>
       </VideoGameContext.Provider>
     </div>
   );

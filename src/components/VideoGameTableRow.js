@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Constants from "../utils/Constants";
 
-function VideoGameTableRow({ videoGame }) {
+function VideoGameTableRow({ videoGame, updateTable }) {
 
   async function deleteModal() {
     const resultado = await Swal.fire({
@@ -36,8 +36,7 @@ function VideoGameTableRow({ videoGame }) {
         draggable: true,
         progress: undefined,
       });
-
-      window.location.reload();
+      updateTable();
     } else {
       toast.error("Failed deleting, try again");
     }

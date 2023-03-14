@@ -2,7 +2,7 @@ import React from "react";
 import VideoGameContext from "../Context/VideoGameContext";
 import VideoGameTableRow from "./VideoGameTableRow";
 
-function VideoGameTable() {
+function VideoGameTable({updateTable}) {
   const videogames = VideoGameContext._currentValue;
 
   return (
@@ -18,7 +18,7 @@ function VideoGameTable() {
         </thead>
         <tbody>
           {videogames.map((videoGame) => {
-            return <VideoGameTableRow videoGame={videoGame} key={videoGame._id}/>;
+            return <VideoGameTableRow videoGame={videoGame} key={videoGame._id} updateTable={updateTable}/>;
           })}
         </tbody>
       </table>
