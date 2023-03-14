@@ -36,7 +36,7 @@ function VideoGameTableRow({ videoGame, updateTable }) {
         draggable: true,
         progress: undefined,
       });
-      // function callback de seeVideoGame
+      // callback function from SeeVideoGame
       updateTable();
     } else {
       toast.error("Failed deleting, try again");

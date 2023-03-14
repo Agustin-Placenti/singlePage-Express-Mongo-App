@@ -8,13 +8,6 @@ import { fetchData } from "../utils/fetchData";
 
 function SeeVideoGames() {
   const [videogames, setVideoGames] = useState([]);
-  // crear objeto formik con array de videogames y videogame
-
-  async function fetchVideos() {
-    const response = await fetchData(`${Constants.RUTE_API_VIDEOS}`);
-    setVideoGames(response);
-    // updatear el objeto formik con el nuevo array
-  } 
 
   async function fetchVideos() {
     const response = await fetchData(`${Constants.RUTE_API_VIDEOS}`);

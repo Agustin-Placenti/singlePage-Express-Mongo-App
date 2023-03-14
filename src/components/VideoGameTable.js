@@ -3,7 +3,7 @@ import VideoGameContext from "../Context/VideoGameContext";
 import VideoGameTableRow from "./VideoGameTableRow";
 
 function VideoGameTable({ updateTable }) {
-  // podria ser un parametro de la funcion, es solo para mostrar context api
+  // could be another param, just to show context api
   const videogames = VideoGameContext._currentValue;
 
   return (

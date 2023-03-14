@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 
 function AddVideoGame() {
-  // wrap form with formik to avoid handleChange function
+  // TODO wrap form with formik to avoid handleChange function
   // <Formik initialValues: ..., validationSchema: ..., onSubmit: ...> <Form> </Formik>
   const [videoGame, setVideoGame] = useState({
     name: "",
@@ -28,6 +28,7 @@ function AddVideoGame() {
     });
     const successful = await response.json();
     if (successful) {
+      // TODO this altert should be passed to SeeVideoGame
       toast("Videogame saved 🎮", {
         position: "top-left",
         autoClose: 1000,
