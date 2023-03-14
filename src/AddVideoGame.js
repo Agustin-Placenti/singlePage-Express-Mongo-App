@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useState } from 'react';
 import Constants from "./Constants";
 import { ToastContainer, toast } from 'react-toastify';
@@ -5,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 function AddVideoGame () {
     // TODO use typescript
-    const [videoGame, setVideoGame] = useState({name: '', price: 0, evaluation: 0});
+    const [videoGame, setVideoGame] = useState({name: '', price: '', evaluation: ''});
 
     async function submitForm (e) {
         e.preventDefault();
@@ -34,29 +35,33 @@ function AddVideoGame () {
             toast.error("Failed Saving, try again");
         }
     }
+
     const handleChange = (e) => {
-        setVideoGame(videoGame => ({
-            ...videoGame,
-            ...e.target.value
-        }));
+        const key = e.target.id;
+        let value = e.target.value;
+        if (key !== "name") {
+            value = parseInt(value);
+        }
+        videoGame[key] = value;
+        setVideoGame(Object.assign({}, videoGame));
     }
 
     return (
         <div className="column is-one-third">
             <h1 className="is-size-3">Add videoGame</h1>
             <ToastContainer></ToastContainer>
-            <form className="field" onSubmit={submitForm()}>
+            <form className="field" onSubmit={() => submitForm(event)}>
                 <div className="form-group">
                     <label className="label" htmlFor="name">Name:</label>
-                    <input autoFocus required placeholder="Name" type="text" id="nombre" onChange={handleChange()} value={videoGame.name} className="input" />
+                    <input autoFocus required placeholder="Name" type="text" id="name" onChange={() => handleChange(event)} value={videoGame.name} className="input" />
                 </div>
                 <div className="form-group">
                     <label className="label" htmlFor="price">Price:</label>
-                    <input required placeholder="Price" type="number" id="price" onChange={handleChange()} value={videoGame.price} className="input" />
+                    <input required placeholder="Price" type="number" id="price" onChange={() => handleChange(event)} value={videoGame.price} className="input" />
                 </div>
                 <div className="form-group">
                     <label className="label" htmlFor="evaluation">Evaluation:</label>
-                    <input required placeholder="Evaluation" type="number" id="evaluation" onChange={handleChange()} value={videoGame.evaluation} className="input" />
+                    <input required placeholder="Evaluation" type="number" id="evaluation" onChange={() => handleChange(event)} value={videoGame.evaluation} className="input" />
                 </div>
                 <div className="form-group">
                     <button className="button is-success mt-2">Save</button>

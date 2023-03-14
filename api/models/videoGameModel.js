@@ -1,15 +1,16 @@
 const mongoose = require('../connection_mongo');
-const VideoGame = mongoose.model('VideoGame', {
-    nombre: {
+
+const VideoGame = mongoose.model('videogames', {
+    name: {
         type: String,
         required: true,
     },
-    precio: {
+    price: {
         type: Number,
         required: true,
         min: 0,
     },
-    calificacion: {
+    evaluation: {
         type: Number,
         required: true,
         min: 0,

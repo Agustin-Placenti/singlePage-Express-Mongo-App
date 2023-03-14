@@ -1,19 +1,17 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import "bulma/css/bulma.css";
-import {
-  HashRouter as Router,
-} from "react-router-dom";
-const domNode = document.getElementById('root');
+import { HashRouter as Router } from "react-router-dom";
+const domNode = document.getElementById("root");
 const root = createRoot(domNode || new DocumentFragment());
 root.render(
   <Router>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </Router>,
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "SET DEBUG=api:* && node ./bin/www"
+    "start": "SET DEBUG=api:* & node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
