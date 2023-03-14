@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import Constants from "./Constants";
+import Constants from "../Constants";
 function VideoGameTable({ videoGame }) {
-  const [deleted, setDeleted] = useState(false);
-
-  useEffect(() => {
-    if (deleted) return null;
-  }, [deleted]);
 
   async function deleteModal() {
     const resultado = await Swal.fire({
@@ -18,7 +13,7 @@ function VideoGameTable({ videoGame }) {
       confirmButtonColor: "#3298dc",
       cancelButtonColor: "#f14668",
       cancelButtonText: "No",
-      confirmButtonText: "Sí, eliminar",
+      confirmButtonText: "Yes, delete",
     });
     if (!resultado.value) {
       return;
@@ -37,7 +32,7 @@ function VideoGameTable({ videoGame }) {
         draggable: true,
         progress: undefined,
       });
-      setDeleted(true);
+      window.location.reload();
     } else {
       toast.error("Failed deleting, try again");
     }

@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Constants from "./Constants";
+import Constants from "../Constants";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VideoGameTable from "./VideoGameTable";
 function SeeVideoGames() {
   const [videogames, setVideoGames] = useState([]);
 
+  const fetchData = async () => {
+    const response = await fetch(`${Constants.RUTE_API}`);
+    const jsonResponse = await response.json();
+    setVideoGames(jsonResponse);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${Constants.RUTE_API}`);
-      const jsonResponse = await response.json();
-      setVideoGames(jsonResponse);
-    };
     fetchData().catch(console.error);
   }, []);
 

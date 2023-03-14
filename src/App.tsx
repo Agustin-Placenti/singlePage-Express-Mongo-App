@@ -1,6 +1,6 @@
-import Nav from "./Nav";
-import AddVideoGame from "./AddVideoGame";
-import SeeVideoGame from "./SeeVideoGame";
+import Nav from "./components/Nav";
+import AddVideoGame from "./components/AddVideoGame";
+import SeeVideoGame from "./components/SeeVideoGame";
 import {
   Routes,
   Route,
