@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 
 function AddVideoGame() {
+  // wrap form with formik to avoid handleChange function
+  // <Formik initialValues: ..., validationSchema: ..., onSubmit: ...> <Form> </Formik>
   const [videoGame, setVideoGame] = useState({
     name: "",
     price: "",
@@ -28,7 +30,7 @@ function AddVideoGame() {
     if (successful) {
       toast("Videogame saved 🎮", {
         position: "top-left",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

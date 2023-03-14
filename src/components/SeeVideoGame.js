@@ -16,11 +16,16 @@ function SeeVideoGames() {
     // updatear el objeto formik con el nuevo array
   } 
 
+  async function fetchVideos() {
+    const response = await fetchData(`${Constants.RUTE_API_VIDEOS}`);
+    setVideoGames(response);
+  }
+
   useEffect(() => {
     fetchVideos();
   }, []);
 
-  function updateTable () {
+  function updateTable() {
     fetchVideos();
   }
 
@@ -31,7 +36,7 @@ function SeeVideoGames() {
         <ToastContainer></ToastContainer>
       </div>
       <VideoGameContext.Provider value={videogames}>
-        <VideoGameTable updateTable={() => updateTable()}/>
+        <VideoGameTable updateTable={() => updateTable()} />
       </VideoGameContext.Provider>
     </div>
   );

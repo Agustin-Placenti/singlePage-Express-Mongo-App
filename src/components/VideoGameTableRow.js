@@ -29,13 +29,14 @@ function VideoGameTableRow({ videoGame, updateTable }) {
     if (successful) {
       toast("Videogame deleted ", {
         position: "top-left",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
       });
+      // function callback de seeVideoGame
       updateTable();
     } else {
       toast.error("Failed deleting, try again");

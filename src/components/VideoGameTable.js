@@ -2,7 +2,8 @@ import React from "react";
 import VideoGameContext from "../Context/VideoGameContext";
 import VideoGameTableRow from "./VideoGameTableRow";
 
-function VideoGameTable({updateTable}) {
+function VideoGameTable({ updateTable }) {
+  // podria ser un parametro de la funcion, es solo para mostrar context api
   const videogames = VideoGameContext._currentValue;
 
   return (
@@ -18,7 +19,13 @@ function VideoGameTable({updateTable}) {
         </thead>
         <tbody>
           {videogames.map((videoGame) => {
-            return <VideoGameTableRow videoGame={videoGame} key={videoGame._id} updateTable={updateTable}/>;
+            return (
+              <VideoGameTableRow
+                videoGame={videoGame}
+                key={videoGame._id}
+                updateTable={updateTable}
+              />
+            );
           })}
         </tbody>
       </table>
