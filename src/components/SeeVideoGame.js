@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import Constants from "../Constants";
+import Constants from "../utils/Constants";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VideoGameTable from "./VideoGameTable";
+import VideoGameContext from "../Context/VideoGameContext";
+import { fetchData } from "../utils/fetchData";
+
 function SeeVideoGames() {
   const [videogames, setVideoGames] = useState([]);
 
-  const fetchData = async () => {
-    const response = await fetch(`${Constants.RUTE_API}`);
-    const jsonResponse = await response.json();
-    setVideoGames(jsonResponse);
-  };
-
   useEffect(() => {
-    fetchData().catch(console.error);
+    async function fetchVideos() {
+      const response = await fetchData(`${Constants.RUTE_API_VIDEOS}`);
+      setVideoGames(response);
+    }
+    fetchVideos();
   }, []);
 
   return (
@@ -22,28 +23,9 @@ function SeeVideoGames() {
         <h1 className="is-size-3">See videogames</h1>
         <ToastContainer></ToastContainer>
       </div>
-      <div className="table-container">
-        <table className="table is-fullwidth is-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Evaluation</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {videogames.map((videoGame) => {
-              return (
-                <VideoGameTable
-                  key={videoGame._id}
-                  videoGame={videoGame}
-                ></VideoGameTable>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <VideoGameContext.Provider value={videogames}>
+        <VideoGameTable />
+      </VideoGameContext.Provider>
     </div>
   );
 }

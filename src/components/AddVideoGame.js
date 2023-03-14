@@ -1,9 +1,10 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState } from "react";
-import Constants from "../Constants";
+import Constants from "../utils/Constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
+
 function AddVideoGame() {
   const [videoGame, setVideoGame] = useState({
     name: "",
@@ -16,7 +17,7 @@ function AddVideoGame() {
     e.preventDefault();
 
     const videoGameJson = JSON.stringify(videoGame);
-    const response = await fetch(`${Constants.RUTE_API}`, {
+    const response = await fetch(`${Constants.RUTE_API_VIDEOS}`, {
       method: "POST",
       body: videoGameJson,
       headers: {
