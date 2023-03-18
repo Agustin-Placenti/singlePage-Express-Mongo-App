@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import React, { useState } from "react";
 import Constants from "../utils/Constants";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,10 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 function AddVideoGame() {
   // TODO wrap form with formik to avoid handleChange function
   // <Formik initialValues: ..., validationSchema: ..., onSubmit: ...> <Form> </Formik>
+  // TODO add TS to videogame interface
   const [videoGame, setVideoGame] = useState({
     name: "",
     price: "",
     evaluation: "",
+    // image: "",
   });
   const navigate = useNavigate();
 
@@ -44,22 +45,43 @@ function AddVideoGame() {
     }
   }
 
-  const handleChange = (e) => {
-    const key = e.target.id;
-    let value = e.target.value;
-    if (key !== "name") {
-      value = parseInt(value);
-    }
-    videoGame[key] = value;
+  const updateVideoGame = (e) => {
+    videoGame[e.target.id] = e.target.value;
     setVideoGame(Object.assign({}, videoGame));
   };
+
+  function encodeImageFileAsURL(e) {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+      videoGame[e.target.id].stringB64 = reader.result;
+      updateVideoGame(e);
+    };
+
+    reader.readAsDataURL(file);
+  }
 
   return (
     <div className="column is-one-third">
       <h1 className="is-size-3">Add videoGame</h1>
       <ToastContainer></ToastContainer>
-      <form className="field" onSubmit={() => submitForm(event)}>
+      <form className="field" onSubmit={(event) => submitForm(event)}>
         <div className="form-group">
+          <label className="label" htmlFor="image">
+            Image:
+          </label>
+          <button>
+            <input
+              // required
+              type="file"
+              id="image"
+              name="filename"
+              accept="image/jpeg"
+              value={videoGame.image}
+              // onChange={(event) => encodeImageFileAsURL(event)}
+            />
+          </button>
           <label className="label" htmlFor="name">
             Name:
           </label>
@@ -69,12 +91,10 @@ function AddVideoGame() {
             placeholder="Name"
             type="text"
             id="name"
-            onChange={handleChange}
+            onChange={(event) => updateVideoGame(event)}
             value={videoGame.name}
             className="input"
           />
-        </div>
-        <div className="form-group">
           <label className="label" htmlFor="price">
             Price:
           </label>
@@ -83,12 +103,10 @@ function AddVideoGame() {
             placeholder="Price"
             type="number"
             id="price"
-            onChange={handleChange}
+            onChange={(event) => updateVideoGame(event)}
             value={videoGame.price}
             className="input"
           />
-        </div>
-        <div className="form-group">
           <label className="label" htmlFor="evaluation">
             Evaluation:
           </label>
@@ -97,7 +115,7 @@ function AddVideoGame() {
             placeholder="Evaluation"
             type="number"
             id="evaluation"
-            onChange={handleChange}
+            onChange={(event) => updateVideoGame(event)}
             value={videoGame.evaluation}
             className="input"
           />

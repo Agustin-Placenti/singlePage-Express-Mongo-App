@@ -9,16 +9,16 @@ import { fetchData } from "../utils/fetchData";
 function SeeVideoGames() {
   const [videogames, setVideoGames] = useState([]);
 
-  async function fetchVideos() {
+  async function fetchVideoGames() {
     const response = await fetchData(`${Constants.RUTE_API_VIDEOS}`);
     setVideoGames(response);
   }
 
   useEffect(() => {
-    fetchVideos();
+    fetchVideoGames();
   }, []);
 
-  const updateTable = () => fetchVideos();
+  const updateTable = () => fetchVideoGames();
 
   return (
     <div>

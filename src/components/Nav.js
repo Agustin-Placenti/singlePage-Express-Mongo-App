@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 function Nav() {
   const [showMenu, setShowMenu] = useState(false);
 
+  // TODO check why menu links active are not working
   const hideMenu = () => setShowMenu(false);
 
   return (

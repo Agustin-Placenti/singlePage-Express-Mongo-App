@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 import Constants from "../utils/Constants";
 
 function VideoGameTableRow({ videoGame, updateTable }) {
-
   async function deleteModal() {
     const resultado = await Swal.fire({
       title: "Confirmation",
@@ -45,6 +44,9 @@ function VideoGameTableRow({ videoGame, updateTable }) {
 
   return (
     <tr>
+      <td>
+        <img alt={videoGame.image} src={videoGame.image} />
+      </td>
       <td>{videoGame.name}</td>
       <td>{videoGame.price}</td>
       <td>{videoGame.evaluation}</td>

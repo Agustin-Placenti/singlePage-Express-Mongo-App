@@ -1,3 +1,0 @@
-const mongoose = require('mongoose');
-    mongoose.connect('mongodb+srv://agustinPlacenti:pepona17@cluster0.psaydvr.mongodb.net/mongodatabase');
-module.exports = mongoose;

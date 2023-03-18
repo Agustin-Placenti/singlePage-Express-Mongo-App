@@ -11,6 +11,7 @@ function VideoGameTable({ updateTable }) {
       <table className="table is-fullwidth is-bordered">
         <thead>
           <tr>
+            <th>Image</th>
             <th>Name</th>
             <th>Price</th>
             <th>Evaluation</th>
@@ -18,7 +19,7 @@ function VideoGameTable({ updateTable }) {
           </tr>
         </thead>
         <tbody>
-          {videogames.map((videoGame) => {
+          {videogames?.map((videoGame) => {
             return (
               <VideoGameTableRow
                 videoGame={videoGame}
