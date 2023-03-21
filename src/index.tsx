@@ -8,9 +8,7 @@ const domNode = document.getElementById("root");
 const root = createRoot(domNode || new DocumentFragment());
 root.render(
   <Router>
-    <React.StrictMode>
       <App />
-    </React.StrictMode>
   </Router>
 );
 

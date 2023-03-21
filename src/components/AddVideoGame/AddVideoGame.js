@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Constants from "../utils/Constants";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Constants from "../../utils/Constants";
+import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 
-function AddVideoGame() {
+function AddVideoGame({handleAddSucessfully}) {
   // TODO wrap form with formik to avoid handleChange function
   // <Formik initialValues: ..., validationSchema: ..., onSubmit: ...> <Form> </Formik>
   // TODO add TS to videogame interface
@@ -12,34 +12,18 @@ function AddVideoGame() {
     name: "",
     price: "",
     evaluation: "",
-    // image: "",
+    image: "",
   });
   const navigate = useNavigate();
 
-  async function submitForm(e) {
+  async function submitForm(e) { 
     e.preventDefault();
 
-    const videoGameJson = JSON.stringify(videoGame);
-    const response = await fetch(`${Constants.RUTE_API_VIDEOS}`, {
-      method: "POST",
-      body: videoGameJson,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const successful = await response.json();
+    const responseAxios = await axios.post(`${Constants.RUTE_API_VIDEOGAMES}`, videoGame)
+    const successful = responseAxios.status === 201;
     if (successful) {
-      // TODO this altert should be passed to SeeVideoGame
-      toast("Videogame saved 🎮", {
-        position: "top-left",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      navigate("/videogames/see");
+      handleAddSucessfully(true);
+      navigate("/");
     } else {
       toast.error("Failed Saving, try again");
     }
@@ -55,20 +39,19 @@ function AddVideoGame() {
     var reader = new FileReader();
 
     reader.onloadend = function () {
-      videoGame[e.target.id].stringB64 = reader.result;
-      updateVideoGame(e);
+      videoGame[e.target.id] = reader.result;
+      setVideoGame(Object.assign({}, videoGame));
     };
 
     reader.readAsDataURL(file);
   }
 
   return (
-    <div className="column is-one-third">
+    <div className="column is-one-third has-text-white" aria-hidden="true">
       <h1 className="is-size-3">Add videoGame</h1>
-      <ToastContainer></ToastContainer>
       <form className="field" onSubmit={(event) => submitForm(event)}>
         <div className="form-group">
-          <label className="label" htmlFor="image">
+          <label className="label has-text-white" htmlFor="image">
             Image:
           </label>
           <button>
@@ -78,11 +61,10 @@ function AddVideoGame() {
               id="image"
               name="filename"
               accept="image/jpeg"
-              value={videoGame.image}
-              // onChange={(event) => encodeImageFileAsURL(event)}
+              onChange={(event) => encodeImageFileAsURL(event)}
             />
           </button>
-          <label className="label" htmlFor="name">
+          <label className="label has-text-white" htmlFor="name">
             Name:
           </label>
           <input
@@ -95,7 +77,7 @@ function AddVideoGame() {
             value={videoGame.name}
             className="input"
           />
-          <label className="label" htmlFor="price">
+          <label className="label has-text-white" htmlFor="price">
             Price:
           </label>
           <input
@@ -107,7 +89,7 @@ function AddVideoGame() {
             value={videoGame.price}
             className="input"
           />
-          <label className="label" htmlFor="evaluation">
+          <label className="label has-text-white" htmlFor="evaluation">
             Evaluation:
           </label>
           <input
@@ -120,10 +102,9 @@ function AddVideoGame() {
             className="input"
           />
         </div>
-        <div className="form-group">
-          <button className="button is-success mt-2">Save</button>
-          &nbsp;
-          <Link to="/videogames/see" className="button is-primary mt-2">
+        <div className="form-group mt-5">
+          <button className="button is-success">Save</button>
+          <Link to="/" className="button is-primary ml-4">
             Back
           </Link>
         </div>

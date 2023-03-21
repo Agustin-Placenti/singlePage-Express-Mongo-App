@@ -8,7 +8,7 @@ function VideoGameTable({ updateTable }) {
 
   return (
     <div className="table-container">
-      <table className="table is-fullwidth is-bordered">
+      <table className="table is-fullwidth has-background-warning" style={{borderRadius: "20px"}}>
         <thead>
           <tr>
             <th>Image</th>

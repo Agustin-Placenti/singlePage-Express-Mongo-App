@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Constants from "../utils/Constants";
+import axios from "axios"
 
 function VideoGameTableRow({ videoGame, updateTable }) {
   async function deleteModal() {
@@ -18,16 +19,11 @@ function VideoGameTableRow({ videoGame, updateTable }) {
     if (!resultado.value) {
       return;
     }
-    const response = await fetch(
-      `${Constants.RUTE_API_VIDEOS}/${videoGame._id}`,
-      {
-        method: "DELETE",
-      }
-    );
-    const successful = await response.json();
+    const responseAxios = await axios.delete(`${Constants.RUTE_API_VIDEOGAMES}/${videoGame._id}`)
+    const successful = responseAxios.status === 204;
     if (successful) {
       toast("Videogame deleted ", {
-        position: "top-left",
+        position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -45,7 +41,7 @@ function VideoGameTableRow({ videoGame, updateTable }) {
   return (
     <tr>
       <td>
-        <img alt={videoGame.image} src={videoGame.image} />
+        <img alt={'img'} src={videoGame.image} />
       </td>
       <td>{videoGame.name}</td>
       <td>{videoGame.price}</td>

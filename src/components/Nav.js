@@ -19,7 +19,7 @@ function Nav() {
             onClick={() => hideMenu()}
             activeclassname="is-active"
             className="navbar-item"
-            to="/videogames/see"
+            to="/"
           >
             See videogames
           </NavLink>
