@@ -41,7 +41,7 @@ function VideoGameTableRow({ videoGame, updateTable }) {
   return (
     <tr>
       <td>
-        <img alt={'img'} src={videoGame.image} />
+        <img alt={'img'} src={videoGame.image} width="50" height="50" />
       </td>
       <td>{videoGame.name}</td>
       <td>{videoGame.price}</td>
