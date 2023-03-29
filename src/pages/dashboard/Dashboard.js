@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Constants from "../utils/Constants";
+import Constants from "../../utils/Constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import VideoGameTable from "./VideoGameTable";
-import VideoGameContext from "../Context/VideoGameContext";
-import { fetchData } from "../utils/fetchData";
+import VideoGameTable from "../../components/VideoGameTable";
+import VideoGameContext from "../../Context/VideoGameContext";
+import { fetchData } from "../../utils/fetchData";
 
-function SeeVideoGames({addSuccessfully, handleAddSucessfully}) {
+function Dashboard({addSuccessfully, handleAddSucessfully}) {
   const [videogames, setVideoGames] = useState([]);
 
   async function fetchVideoGames() {
@@ -45,4 +45,4 @@ function SeeVideoGames({addSuccessfully, handleAddSucessfully}) {
   );
 }
 
-export default SeeVideoGames;
+export default Dashboard;
