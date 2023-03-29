@@ -7,11 +7,12 @@ import axios from "axios"
 function AddVideoGame({handleAddSucessfully}) {
   // TODO wrap form with formik to avoid handleChange function
   // <Formik initialValues: ..., validationSchema: ..., onSubmit: ...> <Form> </Formik>
-  // TODO add TS to videogame interface
-  const [videoGame, setVideoGame] = useState({
+  let videoGame;
+  let setVideoGame;
+  [videoGame, setVideoGame] = useState({
     name: "",
-    price: "",
-    evaluation: "",
+    price: undefined,
+    evaluation: undefined,
     image: "",
   });
   const navigate = useNavigate();
@@ -30,7 +31,8 @@ function AddVideoGame({handleAddSucessfully}) {
   }
 
   const updateVideoGame = (e) => {
-    videoGame[e.target.id] = e.target.value;
+    const id = e.target.id;
+    videoGame[id] = e.target.value;
     setVideoGame(Object.assign({}, videoGame));
   };
 
