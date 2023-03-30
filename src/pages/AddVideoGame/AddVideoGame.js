@@ -7,9 +7,7 @@ import axios from "axios"
 function AddVideoGame({handleAddSucessfully}) {
   // TODO wrap form with formik to avoid handleChange function
   // <Formik initialValues: ..., validationSchema: ..., onSubmit: ...> <Form> </Formik>
-  let videoGame;
-  let setVideoGame;
-  [videoGame, setVideoGame] = useState({
+  const [videoGame, setVideoGame] = useState({
     name: "",
     price: undefined,
     evaluation: undefined,
@@ -30,19 +28,12 @@ function AddVideoGame({handleAddSucessfully}) {
     }
   }
 
-  const updateVideoGame = (e) => {
-    const id = e.target.id;
-    videoGame[id] = e.target.value;
-    setVideoGame(Object.assign({}, videoGame));
-  };
-
   function encodeImageFileAsURL(e) {
-    var file = e.target.files[0];
+    var file = e.target?.files ? e.target.files[0] : '';
     var reader = new FileReader();
 
     reader.onloadend = function () {
-      videoGame[e.target.id] = reader.result;
-      setVideoGame(Object.assign({}, videoGame));
+      setVideoGame({...videoGame, [e.target?.id]: reader.result})
     };
 
     reader.readAsDataURL(file);
@@ -75,7 +66,7 @@ function AddVideoGame({handleAddSucessfully}) {
             placeholder="Name"
             type="text"
             id="name"
-            onChange={(event) => updateVideoGame(event)}
+            onChange={(e) => setVideoGame({...videoGame, [e.target.id]: e.target.value})}
             value={videoGame.name}
             className="input"
           />
@@ -87,7 +78,7 @@ function AddVideoGame({handleAddSucessfully}) {
             placeholder="Price"
             type="number"
             id="price"
-            onChange={(event) => updateVideoGame(event)}
+            onChange={(e) => setVideoGame({...videoGame, [e.target.id]: e.target.value})}
             value={videoGame.price}
             className="input"
           />
@@ -99,7 +90,7 @@ function AddVideoGame({handleAddSucessfully}) {
             placeholder="Evaluation"
             type="number"
             id="evaluation"
-            onChange={(event) => updateVideoGame(event)}
+            onChange={(e) => setVideoGame({...videoGame, [e.target.id]: e.target.value})}
             value={videoGame.evaluation}
             className="input"
           />
